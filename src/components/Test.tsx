@@ -1,175 +1,345 @@
-import React from 'react';
+"use client";
 
-const MonolithLanding: React.FC = () => {
+import React, { useState } from "react";
+import { motion, AnimatePresence } from "framer-motion";
+
+// --- Types ---
+interface NavItemProps {
+  label: string;
+  active?: boolean;
+}
+
+// --- Sub-components ---
+const NavItem = ({ label, active }: NavItemProps) => (
+  <a
+    href="#"
+    className={`font-['Montserrat'] text-[10px] font-bold uppercase tracking-widest transition-colors duration-300 ${
+      active
+        ? "text-[#D4AF37] border-b-2 border-[#D4AF37] pb-1"
+        : "text-white/60 hover:text-white"
+    }`}
+  >
+    {label}
+  </a>
+);
+
+const ServiceCard = ({
+  icon,
+  title,
+  description,
+}: {
+  icon: string;
+  title: string;
+  description: string;
+}) => (
+  <div className="space-y-3 p-4 hover:bg-white/5 transition-colors rounded-lg group">
+    <span className="material-symbols-outlined text-primary text-4xl group-hover:scale-110 transition-transform">
+      {icon}
+    </span>
+    <h4 className="font-['Montserrat'] text-lg font-semibold">{title}</h4>
+    <p className="text-xs text-on-surface-variant leading-relaxed">
+      {description}
+    </p>
+  </div>
+);
+
+// --- Main Component ---
+const VisionaryBuild: React.FC = () => {
+  const [ecoMode, setEcoMode] = useState(false);
+
   return (
-    <div className="bg-background text-on-surface selection:bg-secondary-fixed-dim selection:text-on-secondary-fixed font-['Manrope']">
-      {/* Top Navigation Bar */}
-      <nav className="fixed top-0 w-full z-50 rounded-none bg-white/80 dark:bg-[#000C1E]/80 backdrop-blur-xl shadow-[0px_20px_40px_rgba(0,12,30,0.06)] flex justify-between items-center px-12 py-6 mx-auto">
-        <div className="text-2xl font-serif tracking-tighter text-[#000C1E] dark:text-white uppercase font-bold">
-          MONOLITH
+    <div className="min-h-screen bg-[#131313] text-[#e5e2e1] font-['Work_Sans'] selection:bg-primary selection:text-black">
+      {/* Blueprint Grid Background */}
+      <div
+        className="fixed inset-0 pointer-events-none opacity-20"
+        style={{
+          backgroundImage:
+            "radial-gradient(rgba(212, 175, 55, 0.1) 1px, transparent 1px)",
+          backgroundSize: "40px 40px",
+        }}
+      />
+
+      {/* TopNavBar */}
+      <header className="fixed top-0 w-full z-50 bg-neutral-950/80 backdrop-blur-lg border-b border-white/10 flex justify-between items-center px-6 md:px-16 py-6">
+        <div className="text-xl font-black tracking-tighter text-[#D4AF37]">
+          Гүнд Саплай
         </div>
-        <div className="hidden md:flex items-center gap-12">
-          <a className="font-serif tracking-tight font-bold uppercase text-sm transition-colors duration-300 text-[#775A19] dark:text-[#E9C176] border-b-2 border-[#775A19] pb-1 translate-y-[-2px]" href="#">Home</a>
-          <a className="font-serif tracking-tight font-bold uppercase text-sm transition-colors duration-300 text-slate-600 dark:text-slate-400 hover:text-[#775A19] dark:hover:text-[#E9C176]" href="#">Projects</a>
-          <a className="font-serif tracking-tight font-bold uppercase text-sm transition-colors duration-300 text-slate-600 dark:text-slate-400 hover:text-[#775A19] dark:hover:text-[#E9C176]" href="#">Gallery</a>
-          <a className="font-serif tracking-tight font-bold uppercase text-sm transition-colors duration-300 text-slate-600 dark:text-slate-400 hover:text-[#775A19] dark:hover:text-[#E9C176]" href="#">About</a>
-          <a className="font-serif tracking-tight font-bold uppercase text-sm transition-colors duration-300 text-slate-600 dark:text-slate-400 hover:text-[#775A19] dark:hover:text-[#E9C176]" href="#">Contact</a>
-        </div>
-        <button className="bg-primary text-on-primary px-8 py-3 font-label text-xs tracking-widest uppercase hover:translate-y-[-2px] transition-transform duration-200">
-          Get a Quote
+        <nav className="hidden md:flex items-center gap-8">
+          <NavItem label="Home" active />
+          <NavItem label="Projects" />
+          <NavItem label="3D Tour" />
+          <NavItem label="Client Portal" />
+        </nav>
+        <button className="bg-[#D4AF37] text-neutral-950 px-6 py-2 text-[10px] font-bold uppercase tracking-widest hover:brightness-110 active:scale-95 transition-all shadow-[0_0_15px_rgba(212,175,55,0.3)]">
+          Get Started
         </button>
-      </nav>
+      </header>
 
-      {/* Hero Section */}
-      <section className="relative h-screen w-full flex items-center overflow-hidden bg-primary">
-        <div className="absolute inset-0 z-0">
-          <img 
-            className="w-full h-full object-cover opacity-60 mix-blend-luminosity" 
-            alt="Ultra-modern brutalist concrete villa"
-            src="https://lh3.googleusercontent.com/aida-public/AB6AXuB5ULcHk6RoRqDCJ9X9si07BgCtLpze5y1GwK9LgLORQC67a9SAoOtQctU7bQF-G8ilxREvpyzbJ4ufBTWAfqY8RoPL6PEvyu8wcCN3gvLUVU_9_38QDeEPe1jXUf3a4dthhZ_Uj66_zxm8R0OiNkutBhYzkFCxGsgYg-tLZ3lkNrPRH_LmGFPWdCX3LiID-x6W_d6zmFgmgOhuKEOPHEDkcTEbrvEfbOMFJP7NTY1EBbSSz6JdvfSkmPhy72WH5XcL3rVHK6GO7CM"
-          />
-          <div className="absolute inset-0 bg-gradient-to-r from-[#000C1E] via-transparent to-transparent"></div>
-        </div>
-        <div className="relative z-10 px-12 md:px-24 max-w-6xl">
-          <p className="text-secondary-fixed-dim uppercase tracking-[0.4em] text-xs mb-6 font-semibold">Architectural Excellence</p>
-          <h1 className="text-white text-6xl md:text-8xl font-bold tracking-tighter leading-[0.9] mb-12 max-w-4xl font-serif">
-            Sculpting the Future of Architecture
-          </h1>
-          <div className="flex flex-col md:flex-row gap-6">
-            <button className="bg-[linear-gradient(135deg,#775A19_0%,#E9C176_100%)] text-on-secondary px-10 py-5 font-bold tracking-widest uppercase text-sm hover:translate-y-[-2px] transition-transform shadow-xl">
-              Explore Projects
-            </button>
-            <button className="border border-white/20 text-white backdrop-blur-md px-10 py-5 font-bold tracking-widest uppercase text-sm hover:bg-white hover:text-primary transition-all">
-              Our Philosophy
-            </button>
+      <main className="pt-24 relative z-10">
+        {/* Hero Section */}
+        <section className="relative min-h-[80vh] flex flex-col items-center justify-center text-center px-6 py-16 overflow-hidden">
+          <div className="absolute inset-0 -z-10 opacity-10">
+            {/* Шинэ арын зураг (Барилга) */}
+            <img
+              src="https://images.unsplash.com/photo-1541888946425-d81bb19240f5?q=80&w=2070&auto=format&fit=crop"
+              alt="Construction site at sunset"
+              className="w-full h-full object-cover grayscale"
+            />
           </div>
-        </div>
-        <div className="absolute bottom-12 right-12 hidden lg:flex flex-col items-end gap-2 text-white/40">
-          <span className="text-[10px] tracking-[0.5em] uppercase [writing-mode:vertical-rl] rotate-180">Scroll to Explore</span>
-          <div className="w-[1px] h-24 bg-white/20 relative overflow-hidden">
-            <div className="absolute top-0 w-full h-1/2 bg-secondary-fixed-dim"></div>
-          </div>
-        </div>
-      </section>
 
-      {/* Showroom Section */}
-      <section className="py-32 px-12 md:px-24 bg-surface-container-low">
-        <div className="flex flex-col md:flex-row justify-between items-end mb-24 gap-8">
-          <div className="max-w-2xl">
-            <h2 className="text-5xl font-bold tracking-tight text-on-surface mb-8 font-serif">The Showroom</h2>
-            <p className="text-on-surface-variant font-body leading-relaxed text-lg">
-              A curated exhibition of our structural DNA. Witness the tactile precision of raw materials fused with pioneering digital visualization.
+          <motion.div
+            initial={{ opacity: 0, y: 20 }}
+            animate={{ opacity: 1, y: 0 }}
+            transition={{ duration: 0.8 }}
+            className="max-w-4xl"
+          >
+            <span className="text-[12px] font-semibold text-primary tracking-[0.4em] uppercase mb-4 block">
+              Дижитал Урлал & Инженерчлэл
+            </span>
+            <h1 className="font-['Montserrat'] text-5xl md:text-7xl font-bold mb-6 tracking-tight leading-none">
+              Ухаалаг Барилгын <br />{" "}
+              <span className="text-transparent bg-clip-text bg-gradient-to-r from-[#ffbb00] to-[#fde296]">
+                Дижитал Шилжилт
+              </span>
+            </h1>
+            <p className="text-lg md:text-xl text-on-surface-variant mb-10 max-w-2xl mx-auto font-light">
+              AI-д суурилсан 3D төлөвлөлт болон байгальд ээлтэй архитектурын
+              нэгдэл.
             </p>
+            <button className="bg-primary text-on-primary px-10 py-5 font-bold uppercase tracking-widest flex items-center gap-3 mx-auto hover:shadow-[0_0_30px_rgba(242,202,80,0.4)] transition-all">
+              3D Туршилт эхлүүлэх
+              <span className="material-symbols-outlined">rocket_launch</span>
+            </button>
+          </motion.div>
+        </section>
+
+        {/* 3D Viewport Section */}
+        <section className="px-6 md:px-16 mb-24 mt-30">
+          <div className="max-w-[1440px] mx-auto">
+            <div className="relative aspect-video bg-neutral-900 rounded-2xl border border-white/5 overflow-hidden shadow-2xl group viewport-gradient">
+              {/* Overlays */}
+              <div className="absolute top-6 left-6 z-20 space-y-4">
+                <div className="bg-black/60 backdrop-blur-xl p-5 border border-white/10 rounded-xl">
+                  <h4 className="text-[10px] font-bold text-primary uppercase tracking-widest mb-3">
+                    Техник үзүүлэлт
+                  </h4>
+                  <div className="space-y-2 text-[10px] font-medium text-white/70">
+                    <div className="flex justify-between gap-12 border-b border-white/5 pb-1">
+                      <span>Polygons</span>
+                      <span className="text-white">2.4M</span>
+                    </div>
+                    <div className="flex justify-between gap-12 border-b border-white/5 pb-1">
+                      <span>Material</span>
+                      <span className="text-white">Eco-Synthetic</span>
+                    </div>
+                    <div className="flex justify-between gap-12">
+                      <span>Engine</span>
+                      <span className="text-white">RTX Real-time</span>
+                    </div>
+                  </div>
+                </div>
+              </div>
+
+              <div className="absolute top-6 right-6 z-20">
+                <button
+                  onClick={() => setEcoMode(!ecoMode)}
+                  className={`px-6 py-2 rounded-full font-bold text-[10px] flex items-center gap-2 transition-all border ${
+                    ecoMode
+                      ? "bg-green-500 text-black border-green-400"
+                      : "bg-white/5 text-white border-white/20 hover:bg-white/10"
+                  }`}
+                >
+                  <span className="material-symbols-outlined text-sm">eco</span>
+                  {ecoMode ? "Eco-Mode Active" : "Enable Eco-Mode"}
+                </button>
+              </div>
+
+              {/* Simulation of 3D Model Image - Шинэ зураг (Орчин үеийн байшин) */}
+              <motion.img
+                animate={{ scale: ecoMode ? 1.05 : 1 }}
+                src="https://images.unsplash.com/photo-1600585154340-be6161a56a0c?q=80&w=2070&auto=format&fit=crop"
+                alt="Modern 3D render of a villa"
+                className={`w-full h-full object-cover transition-all duration-700 ${ecoMode ? "hue-rotate-90 saturate-150" : "grayscale-0"}`}
+              />
+
+              <div className="absolute inset-0 bg-gradient-to-t from-black via-transparent to-transparent opacity-60" />
+            </div>
           </div>
-          <div className="flex gap-4">
-            <span className="material-symbols-outlined text-4xl text-secondary-fixed-dim">texture</span>
-            <span className="material-symbols-outlined text-4xl text-outline-variant">architecture</span>
+        </section>
+
+        {/* Sustainability Section */}
+        <section className="bg-neutral-900/50 px-6 md:px-16 py-24 border-y border-white/5">
+          <div className="max-w-[1440px] mx-auto grid md:grid-cols-2 gap-16 items-center">
+            <div className="space-y-8">
+              <span className="text-[12px] font-bold text-primary uppercase tracking-widest">
+                Тогтвортой Ирээдүй
+              </span>
+              <h2 className="font-['Montserrat'] text-4xl md:text-5xl font-bold leading-tight">
+                Байгальд ээлтэй төлөвлөлт нь ирээдүйн тогтвортой хөгжлийн үндэс
+                юм
+              </h2>
+              <div className="grid sm:grid-cols-3 gap-8">
+                <ServiceCard
+                  icon="solar_power"
+                  title="Solar Energy"
+                  description="Нарны эрчим хүчийг хамгийн үр дүнтэйгээр ашиглах байршил."
+                />
+                <ServiceCard
+                  icon="water_drop"
+                  title="Water Recycling"
+                  description="Саарал ус дахин ашиглах нэгдсэн ухаалаг систем."
+                />
+                <ServiceCard
+                  icon="thermostat"
+                  title="Thermal Efficiency"
+                  description="Дулаан алдагдлыг 90% хүртэл бууруулах материал."
+                />
+              </div>
+            </div>
+            <div className="relative h-[500px] rounded-2xl overflow-hidden">
+              {/* Шинэ зураг (Ногоон архитектур) */}
+              <img
+                src="https://images.unsplash.com/photo-1597116827038-76635d3d4400?q=80&w=2070&auto=format&fit=crop"
+                className="w-full h-full object-cover grayscale hover:grayscale-0 transition-all duration-1000"
+                alt="Modern building with vertical gardens"
+              />
+            </div>
           </div>
-        </div>
-        <div className="grid grid-cols-1 md:grid-cols-3 gap-1">
-          {/* Material Cards */}
-          {[
-            { id: "01", title: "Italian Marble", tag: "Textures", src: "1", desc: "Sourced from the heart of Carrara, our marble selections provide timeless structural weight." },
-            { id: "02", title: "Cold-Pressed Steel", tag: "Engineering", src: "2", desc: "Uncompromising strength meets industrial elegance in our bespoke structural frameworks." },
-            { id: "03", title: "Digital Twin Renders", tag: "Visualization", src: "3", desc: "Experience the unseen through hyper-realistic 3D projections of tomorrow's spaces." }
-          ].map((item) => (
-            <div key={item.id} className="group relative aspect-[3/4] bg-primary overflow-hidden">
-              <img className="w-full h-full object-cover opacity-80 group-hover:scale-105 transition-transform duration-700" src={`http://googleusercontent.com/profile/picture/${item.src}`} alt={item.title} />
-              <div className="absolute inset-0 p-10 flex flex-col justify-end bg-gradient-to-t from-black/80 to-transparent">
-                <span className="text-secondary-fixed-dim text-xs tracking-widest uppercase mb-2">{item.id}. {item.tag}</span>
-                <h3 className="text-white text-3xl font-bold mb-4 font-serif">{item.title}</h3>
-                <p className="text-white/60 text-sm font-light leading-relaxed max-h-0 group-hover:max-h-20 transition-all duration-500 overflow-hidden">
-                  {item.desc}
+        </section>
+
+        {/* Client Portal Snippet */}
+        <section className="px-6 md:px-16 py-24">
+          <div className="max-w-[1440px] mx-auto bg-[#1A1A1A] rounded-3xl border border-white/10 p-8 md:p-12 relative overflow-hidden">
+            <div className="flex flex-col md:flex-row justify-between items-start md:items-center gap-8 mb-12">
+              <div>
+                <h2 className="font-['Montserrat'] text-3xl font-bold mb-2">
+                  Түншийн Портал
+                </h2>
+                <p className="text-white/50">
+                  Төслийн явц болон урамшууллын хяналт
                 </p>
               </div>
+              <div className="flex gap-4">
+                <div className="bg-white/5 p-5 rounded-2xl border border-white/5 min-w-[140px]">
+                  <span className="text-[10px] font-bold text-white/40 block uppercase mb-1">
+                    Таны Оноо
+                  </span>
+                  <span className="text-2xl font-bold text-primary">
+                    1,500 XP
+                  </span>
+                </div>
+                <div className="bg-primary/10 p-5 rounded-2xl border border-primary/20 min-w-[140px]">
+                  <span className="text-[10px] font-bold text-primary block uppercase mb-1">
+                    Цол
+                  </span>
+                  <span className="text-2xl font-bold text-primary">
+                    Алтан Түнш
+                  </span>
+                </div>
+              </div>
             </div>
-          ))}
-        </div>
-      </section>
 
-      {/* Integrated Disciplines Section */}
-      <section className="bg-[#000C1E] text-white py-32 px-12 md:px-24">
-        <div className="grid grid-cols-1 lg:grid-cols-12 gap-16 items-start">
-          <div className="lg:col-span-4 lg:sticky lg:top-32">
-            <h2 className="text-5xl font-bold tracking-tighter leading-none mb-12 font-serif">Integrated Disciplines</h2>
-            <div className="space-y-12">
-              <div className="border-l-2 border-secondary-fixed-dim pl-8">
-                <h4 className="text-secondary-fixed-dim text-xl font-bold uppercase tracking-widest mb-4 font-serif">Architecture</h4>
-                <p className="text-slate-400 font-light leading-relaxed">Defining the skyline through monolithic forms and intentional voids. Our architecture is a dialogue between site and structure.</p>
+            <div className="grid md:grid-cols-3 gap-8">
+              <div className="md:col-span-2 bg-black/40 p-8 rounded-2xl border border-white/5">
+                <div className="flex justify-between items-end mb-6">
+                  <h5 className="font-bold">Төсөл: Улаанбаатар Резиденс</h5>
+                  <span className="text-xs font-bold text-primary">
+                    75% Дууссан
+                  </span>
+                </div>
+                <div className="w-full h-3 bg-white/5 rounded-full overflow-hidden">
+                  <motion.div
+                    initial={{ width: 0 }}
+                    whileInView={{ width: "75%" }}
+                    className="h-full bg-primary shadow-[0_0_20px_rgba(242,202,80,0.6)]"
+                  />
+                </div>
               </div>
-              <div className="border-l-2 border-white/10 pl-8 opacity-40 hover:opacity-100 transition-opacity">
-                <h4 className="text-white text-xl font-bold uppercase tracking-widest mb-4 font-serif">Engineering</h4>
-                <p className="text-slate-400 font-light leading-relaxed">Precision as an art form. We solve complex structural puzzles with invisible sophistication and technical mastery.</p>
-              </div>
-              <div className="border-l-2 border-white/10 pl-8 opacity-40 hover:opacity-100 transition-opacity">
-                <h4 className="text-white text-xl font-bold uppercase tracking-widest mb-4 font-serif">Interior Design</h4>
-                <p className="text-slate-400 font-light leading-relaxed">Curation of the sensory experience. We sculpt environments that balance intimacy with architectural grandeur.</p>
+              <div className="bg-white/5 p-8 rounded-2xl border border-white/5 flex flex-col justify-between">
+                <div className="flex items-center gap-4">
+                  <div className="w-12 h-12 rounded-full bg-primary/20 flex items-center justify-center">
+                    <span className="material-symbols-outlined text-primary">
+                      military_tech
+                    </span>
+                  </div>
+                  <div>
+                    <p className="text-sm font-bold">Diamond Status</p>
+                    <p className="text-[10px] text-white/40">500 XP үлдсэн</p>
+                  </div>
+                </div>
+                <button className="w-full mt-8 py-4 bg-transparent border border-primary text-primary font-bold text-[10px] uppercase tracking-widest hover:bg-primary hover:text-black transition-all">
+                  Хичээл эхлүүлэх
+                </button>
               </div>
             </div>
           </div>
-          <div className="lg:col-span-8">
-            <div className="space-y-1">
-              <img className="w-full aspect-video object-cover" src="https://lh3.googleusercontent.com/aida-public/AB6AXuDAG6lti2r5OqC1n3AhllQmG-pSOELhTP1NTl7-GWEUF9yWsS0V_GxnuEGbBaEzwerecxHeUkbulkLjT64Z1gDS9XXgwiBlxodcMd_YmCEjsqnfz-LmH9DQtInp5ujVQeHfwBoQYkIsvglErpTUahtBOKSBBzPHxLDTfOIICa3ht7dQbpWotd7OMh3weBUYF6G18ZRabCj1DGfm_fz3_xhwCBsXL4DokQoC4J_dznk4J-esPM-Fo2SI4rbjhnG5rpzBDR0rn1wGDh4" alt="Architecture" />
-              <div className="grid grid-cols-2 gap-1">
-                <img className="w-full aspect-square object-cover" src="https://lh3.googleusercontent.com/aida-public/AB6AXuDMHmvLpvJ905b3G07Z6s6ZovAANdYdHqmKIixsCmpZux-x9kRkDExwcPlgp8wo5H-pYbDmzVzpEhgiAeQF9Go-JaBsWZAZUXd_bn4ow0NHASAo9Ui57bSQxaM6o7RkNBZw7LCAK_YAma-lClTVTNCDeCJcFPFhl8Ri0FZEJ1MRqFt3qcisv9cS4vyhSd4VKioUYrSvOSKd4rQ9QxsArHc2LGOztCN9e8icNLuCuoM6IPwZvZL_NdT-Wf7iB1yCXqyCMVEBDi6Qqlc" alt="Detail" />
-                <img className="w-full aspect-square object-cover" src="https://lh3.googleusercontent.com/aida-public/AB6AXuAs0_8VUpge3TPjZAzokXFHuqI3tc0PLwrFJrOXd4-C0Omu6gMatyZfAqAg0B8cO8PT3OHHfdlECzgkx-gGAAMc6ElCU1DuMjd33OEkQWiVFSQTreJ7Xi1uy55f0nz8Bg2y0lYnzRySg4Y8bSVhEKH0b2pqP5UaMLcYZ6xtHXBKQ2h_6qDUZ0vwxag3V6slQmvmoNxX_xz8Ozks3KtBCkxSy0bczjL_KcI8oDEpTsshW9luSsW3Fe3SKqJukaejJH_-q_KKqjsM7y4" alt="Interior" />
-              </div>
-            </div>
-          </div>
-        </div>
-      </section>
+        </section>
+      </main>
 
       {/* Footer */}
-      <footer className="bg-[#000C1E] text-white w-full grid grid-cols-1 md:grid-cols-4 gap-16 px-12 py-20">
-        <div className="md:col-span-1">
-          <div className="text-lg font-serif italic text-[#E9C176] mb-8 uppercase font-bold tracking-tighter">MONOLITH</div>
-          <p className="text-slate-400 text-sm tracking-wide font-light leading-relaxed mb-8">
-            Building icons of permanence. We fuse the weight of traditional craftsmanship with the light of future innovation.
-          </p>
-          <div className="flex gap-6">
-            <span className="material-symbols-outlined text-white hover:text-[#E9C176] cursor-pointer transition-colors">public</span>
-            <span className="material-symbols-outlined text-white hover:text-[#E9C176] cursor-pointer transition-colors">camera</span>
-            <span className="material-symbols-outlined text-white hover:text-[#E9C176] cursor-pointer transition-colors">share</span>
-          </div>
-        </div>
-        <div>
-          <h5 className="text-xs uppercase tracking-[0.3em] font-bold mb-8 text-[#E9C176]">Explore</h5>
-          <ul className="space-y-4 text-slate-400 text-sm font-light">
-            {['Architecture', 'Materials', 'Sustainability', 'Safety', 'Legal'].map(item => (
-              <li key={item} className="hover:text-[#E9C176] hover:translate-x-1 transition-transform cursor-pointer">{item}</li>
-            ))}
-          </ul>
-        </div>
-        <div>
-          <h5 className="text-xs uppercase tracking-[0.3em] font-bold mb-8 text-[#E9C176]">Offices</h5>
-          <div className="space-y-6">
-            <div>
-              <p className="text-white text-sm font-bold mb-1">Zurich</p>
-              <p className="text-slate-400 text-xs font-light">Bahnhofstrasse 45, 8001</p>
+      <footer className="bg-black py-16 border-t border-white/5 px-6 md:px-16">
+        <div className="max-w-[1440px] mx-auto flex flex-col md:flex-row justify-between gap-12">
+          <div className="space-y-4">
+            <div className="text-2xl font-black text-[#D4AF37] tracking-tighter">
+              VISIONARY BUILD 3D
             </div>
-            <div>
-              <p className="text-white text-sm font-bold mb-1">New York</p>
-              <p className="text-slate-400 text-xs font-light">725 Fifth Avenue, NY 10022</p>
+            <p className="text-[10px] uppercase tracking-[0.3em] text-white/30">
+              Digital Craftsmanship for the Modern Era
+            </p>
+          </div>
+          <div className="flex gap-24">
+            <div className="space-y-4">
+              <h6 className="text-[10px] font-bold uppercase tracking-widest text-white/40">
+                Company
+              </h6>
+              <ul className="space-y-2 text-[10px] uppercase font-bold tracking-widest">
+                <li>
+                  <a href="#" className="hover:text-primary transition-colors">
+                    Sustainability
+                  </a>
+                </li>
+                <li>
+                  <a href="#" className="hover:text-primary transition-colors">
+                    Technical Specs
+                  </a>
+                </li>
+              </ul>
+            </div>
+            <div className="space-y-4">
+              <h6 className="text-[10px] font-bold uppercase tracking-widest text-white/40">
+                Legal
+              </h6>
+              <ul className="space-y-2 text-[10px] uppercase font-bold tracking-widest">
+                <li>
+                  <a href="#" className="hover:text-primary transition-colors">
+                    Privacy Policy
+                  </a>
+                </li>
+                <li>
+                  <a href="#" className="hover:text-primary transition-colors">
+                    Terms
+                  </a>
+                </li>
+              </ul>
             </div>
           </div>
-        </div>
-        <div className="flex flex-col justify-between">
-          <div>
-            <h5 className="text-xs uppercase tracking-[0.3em] font-bold mb-8 text-[#E9C176]">Newsletter</h5>
-            <div className="relative">
-              <input className="w-full bg-white/5 border-none border-b border-white/20 px-0 py-4 text-xs tracking-widest focus:ring-0 focus:border-secondary-fixed-dim transition-colors placeholder:text-white/20" placeholder="YOUR EMAIL" type="email" />
-              <button className="absolute right-0 bottom-4">
-                <span className="material-symbols-outlined text-secondary-fixed-dim">arrow_forward</span>
-              </button>
+          <div className="text-right flex flex-col items-end gap-4">
+            <div className="bg-white/5 px-4 py-2 rounded-lg border border-white/5 flex items-center gap-2">
+              <span className="material-symbols-outlined text-primary text-sm">
+                auto_awesome
+              </span>
+              <span className="text-[10px] font-bold uppercase tracking-widest text-white/60">
+                Powered by AI
+              </span>
             </div>
+            <p className="text-[10px] text-white/20">
+              © 2026 Visionary Build 3D. All Rights Reserved.
+            </p>
           </div>
-          <p className="text-slate-400 text-[10px] tracking-widest mt-12 md:mt-0 uppercase">
-            © 2024 Monolith Construction. All rights reserved.
-          </p>
         </div>
       </footer>
     </div>
   );
 };
 
-export default MonolithLanding;
+export default VisionaryBuild;
